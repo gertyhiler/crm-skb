@@ -1,0 +1,267 @@
+/* main style modal window */
+
+
+.modal__window {
+  background-color: var(--element-bg);
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.15);
+
+  width: 100%;
+  padding-bottom: 27px;
+}
+
+.modal__container {
+  margin: 0 30px;
+}
+
+.modal__close-btn {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+
+  top: 15px;
+  right: 15px;
+
+  width: 20px;
+  height: 20px;
+}
+
+.modal__close-btn::after,
+.modal__close-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+
+  border: 1px solid #b0b0b0;
+}
+
+.modal__close-btn::after {
+  transform: rotate(-45deg);
+}
+
+.modal__close-btn::before {
+  transform: rotate(45deg);
+}
+
+/* main style modal form */
+
+.modal__header {
+  display: flex;
+  align-items: baseline;
+
+  margin-bottom: 25px;
+  padding-top: 24px;
+}
+
+.modal__headline {
+  margin-right: 9px;
+}
+
+.modal__client-id {
+  color: var(--text-gray);
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__label {
+  display: inherit;
+  flex-direction: inherit;
+  position: relative;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--text-gray);
+}
+
+.label__text {
+  position: absolute;
+  
+  font-size: 15px;
+
+  transition: transform .2s ease-in, font-size .2s ease-in;
+}
+
+.label__text_active {
+  transform: translateY(-12px);
+  font-size: inherit;
+}
+
+.modal__label:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.modal__label:last-child {
+  margin-bottom: 26px;
+}
+
+.modal__label_requared::after {
+  content: "*";
+  color: var(--violet);
+}
+
+.modal__input {
+  border-bottom: 1px solid #c8c5d180;
+
+  padding-bottom: 4px;
+  padding-top: 5px;
+  transition: border-color .2s ease-in;
+}
+
+.modal__input_invalid {
+  border-color: var(--error);
+}
+
+.add-contact {
+  display: inline-flex;
+  flex-direction: column;
+
+  background-color: #c8c5d138;
+  padding: 25px 0;
+  margin-bottom: 25px;
+}
+
+.add-contact__group {
+  width: 100%;
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid #C8C5D1;
+}
+
+.add-contact__group:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.add-contact__group:last-child {
+  margin-bottom: 25px;
+}
+
+.select__text {
+  color: var(--black);
+}
+
+.add-contact__input {
+  padding: 12px 12px;
+  flex-grow: 1;
+}
+
+.add-contact_clear {
+  padding: 10px 8px;
+  background-color: #E7E5EB;
+  border-left: 1px solid #C8C5D1;
+}
+
+.modal__add-contact_btn {
+  width: fit-content;
+  padding-left: 18px;
+  margin: 0 auto;
+
+  background: left no-repeat url('../img/add-contact.svg');
+}
+
+.modal__btn {
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: 600;
+ 
+  color: var(--element-bg);
+
+  background-color: var(--violet);
+
+  padding: 12px 35px;
+  margin-bottom: 5px;
+}
+
+.modal__secendary-btn {
+  text-decoration-line: underline;
+  color: var(--black);
+}
+
+.modal__cancel-btn {
+  margin: 0 auto;
+  width: fit-content;
+  text-decoration-line: underline;
+}
+
+.error-container {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.error-text {
+  display: block;
+  color: var(--error);
+}
+
+.error-text:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+/* modal main style alert */
+
+.modal__window_alert {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal__footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__info {
+  max-width: 275px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Choices setting */
+
+.choices {
+  margin-bottom: 0;
+  flex: 0 0 33%;
+  border-right: 1px solid #C8C5D1;
+  background-color: #E7E5EB;
+}
+.choices__inner {
+  border: none;
+border-radius: 0;
+}
+.is-open .choices__inner {
+  border-radius: 0;
+  min-height: initial;
+}
+.choices__list--dropdown .choices__item--selectable, .choices__list[aria-expanded] .choices__item--selectable {
+  padding-right: 10px;
+}
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  border: 1px solid #C8C5D1;
+  background-color: #E7E5EB;
+  left: -.7px;
+  width: 101.1%;
+  border-radius: 0;
+}
+
+.choices[data-type*=select-one] .choices__inner {
+  padding: 14px 8px;
+}
+
+/* hystalmodal setting */
+
+.hystmodal__window {
+  cursor: default;
+}
+.hystmodal__wrap {
+  cursor: pointer;
+}

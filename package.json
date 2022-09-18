@@ -1,0 +1,19 @@
+{
+  "name": "crm-contacts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-app": "cd crm-frontend && browser-sync start --config bs-config.js",
+    "start-server": "cd crm-backend && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.skillbox.ru/andrei_korobka/frontend-pro.git"
+  },
+  "author": "Andrew Korobka",
+  "license": "ISC",
+  "dependencies": {
+    "choices.js": "^10.1.0"
+  }
+}

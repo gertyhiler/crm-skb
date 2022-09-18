@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./img/logo.svg">
+
+  <link rel="preload" as="style" href="./css/font.css">
+
+  <link rel="stylesheet" href="./node_modules/choices.js/public/assets/styles/choices.min.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/font.css">
+  <link rel="stylesheet" href="./css/hystmodal.min.css">
+  <link rel="stylesheet" href="./node_modules/toastify-js/src/toastify.css">
+  <link rel="stylesheet" href="./node_modules/tippy.js/dist/tippy.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/modal.css">
+  <link rel="stylesheet" href="./css/loader.css">
+  
+  <script defer src="./node_modules/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script defer src="./node_modules/inputmask/dist/inputmask.js"></script>
+  <script defer src="./js/hystmodal.min.js"></script>
+  <script defer src="./node_modules/toastify-js/src/toastify.js"></script>
+  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+  <script defer src="./node_modules/tippy.js/dist/tippy.umd.min.js"></script>
+
+  <script defer type="module" src="./js/index.js"></script>
+  <title>CRM - contacts</title>
+</head>
+  <body>
+    <header class="header">
+      <img src="./img/logo.svg" alt="Логотип CRM" class="logo">
+    </header>
+    <main>
+      <section id="app" class="container contacts">
+        <h2 class="headline contacts__headline">
+          Клиенты
+        </h2>
+
+      </section>
+    
+    </main>
+
+    <div class="hystmodal" id="modal" aria-hidden="true">
+      <div class="hystmodal__wrap">
+          <div class="hystmodal__window" role="dialog" aria-content-modal aria-modal="true">
+          </div>
+      </div>
+    </div>
+    <div class="hystmodal" id="alert-modal" aria-hidden="true">
+      <div class="hystmodal__wrap">
+          <div class="hystmodal__window" role="dialog" aria-content-modal aria-modal="true">
+          </div>
+      </div>
+    </div>
+    <div class="hystmodal" id="totorial" aria-hidden="true">
+      <div class="hystmodal__wrap">
+          <div class="hystmodal__window" role="dialog" aria-content-modal aria-modal="true">
+            <div class="modal__container">
+              <div class="modal__header">
+                <h4 class="headline modal__headline">Туториал</h4>
+              </div>
+              <div class="modal__content">
+                <p>Привет! Коротко о функционале приложения:</p>
+                <ol>
+                  <li class="item">
+                    При добавлении пользователя открывается окно, внутри которго, ввод строго с большой буквы. Если нажать на крестик, окно будет свернуто, а все что было внутри сохраниться. Если нажать на крестик для закрытия с зажатой кнопкой cmd/win окно будет закрыто.
+                  </li>
+                  <li class="item">
+                    При добавлении контакта поле можно очистить нажатием кнопки справа от поля, если зажать cmd/win поле будет удалено.
+                  </li>
+                  <li class="item">
+                    При нажатии на результат поиска страница проскроллит к выбранной строке.
+                  </li>
+                  <li class="item">
+                    Когда окно с контактом открыто из строки бразера можно скопировать ссылку и отправить ее, при открытии этой ссылки сразу будет открыто окно для просмотра контакта.
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

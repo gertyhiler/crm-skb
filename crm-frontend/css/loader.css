@@ -1,0 +1,38 @@
+.loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 114px 0;
+  background-color: var(--element-bg); 
+}
+
+.loader__image {
+  animation: loader 1s linear infinite;
+}
+
+.loader-btn {
+  cursor: default;  
+}
+
+.loader-btn::after {
+  animation: loader 1s ease-in-out infinite;
+}
+
+.loader-btn_change::after {
+  background-image: url('../img/loader-change.svg');
+}
+
+.loader-btn_del::after {
+  background-image: url('../img/loader-delete.svg');
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

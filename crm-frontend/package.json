@@ -1,0 +1,27 @@
+{
+  "name": "crm-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.skillbox.ru/andrei_korobka/frontend-pro.git"
+  },
+  "author": "Andrew Korobka",
+  "license": "ISC",
+  "dependencies": {
+    "choices.js": "^10.1.0",
+    "inputmask": "^5.0.7",
+    "just-validate": "^3.8.1",
+    "tippy.js": "^6.3.7",
+    "toastify-js": "^1.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
