@@ -17,6 +17,7 @@
   });
 
   let clientsState = [];
+  const lastSorted = { sortedType: 'id', sortedStatus: 'down' };
   function createTable() {
     const table = document.createElement('table');
     table.classList.add('table', 'contacts__table');
@@ -181,8 +182,8 @@
 
     return { loader, image };
   }
-  function createClientContacts(contacts, isUpdate) {
-    if (!isUpdate) {
+  function createClientContacts(contacts, isSorted) {
+    if (!isSorted) {
       contacts.sort((a, b) => {
         if (a.type === 'tel' || b.type !== 'tel') return -1;
         if (a.type === b.type) return 0;
@@ -208,7 +209,7 @@
       },
       email: {
         alt: 'Написать',
-        src: '/img/contact-info-email.svg',
+        src: './img/contact-info-email.svg',
         href: 'mailto:',
         mask: 'a{1,20}@a{2,10}.a{2,4}',
       },
@@ -272,13 +273,10 @@
   }
 
   async function updateTable() {
-    const loaderObj = createLoader();
-    document.getElementById('app').append(loaderObj.loader);
     const clients = await getClientsServer();
-    if (clients) {
-      const tbody = createTbody(clients, true);
-      loaderObj.loader.remove();
-      table.append(tbody);
+    if (await clients) {
+      clientsState = await clients;
+      sortedTable(lastSorted.sortedType, lastSorted.sortedStatus, true, false);
       return table;
     }
     return null;
@@ -328,7 +326,7 @@
   async function addModalAlert(id) {
     const promiseAlert = await createAlertModal();
     if (promiseAlert) {
-      deleteClientServer(id);
+      await deleteClientServer(id);
     }
     updateTable();
   }
@@ -346,6 +344,7 @@
     const inputs = [];
     let contacts = [];
     const isData = Boolean(Object.keys(data).length);
+    const isDraft = Boolean(!data.id);
     const form = document.createElement('form');
     form.classList.add('modal__form');
     form.method = 'post';
@@ -467,7 +466,6 @@
     const submitBtn = document.createElement('button');
     submitBtn.classList.add('btn', 'text', 'modal__btn');
     submitBtn.textContent = 'Сохранить';
-    submitBtn.type = 'submit';
 
     const addContactContainer = document.createElement('div');
     addContactContainer.classList.add('add-contact');
@@ -580,7 +578,8 @@
       e.preventDefault();
     });
 
-    submitBtn.addEventListener('click', async () => {
+    submitBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
       function resetStateForm() {
         formState = {};
         // eslint-disable-next-line no-param-reassign
@@ -588,8 +587,8 @@
         contacts = [];
       }
       const formData = generateData();
-      if (isData) {
-        const response = changeClientServer(data.id, formData);
+      if (!isDraft) {
+        const response = await changeClientServer(data.id, formData);
         if (response) {
           resetStateForm();
           modal.close();
@@ -624,13 +623,13 @@
     return { modalWindow, closeModalBtn };
   }
 
-  function createTbody(clients, isUpdate = false) {
+  function createTbody(clients, isUpdate = false, isSorted = false) {
     function createTableRow(client) {
       const updateDate = new Date(client.updatedAt);
       const updateDateYMD = client.updatedAt.split('T').shift().split('-').join('.');
       const createdDate = new Date(client.createdAt);
       const createdDateYMD = client.createdAt.split('T').shift().split('-').join('.');
-      const contacts = createClientContacts(client.contacts, isUpdate);
+      const contacts = createClientContacts(client.contacts, isSorted);
       const actionBtnClasses = ['btn', 'text', 'action__btn'];
       const tr = document.createElement('tr');
       tr.classList.add('table__row', 'client');
@@ -709,7 +708,11 @@
         const link = document.createElement('a');
         link.classList.add('link', 'text', 'form__link');
         link.textContent = `${contact.surname} ${contact.name} ${contact.lastName}`;
-        link.href = `#${contact.id}`;
+        // link.href = `#${contact.id}`;
+        link.addEventListener('click', () => {
+          addModalContent(createModal('Клиент', contact));
+          modal.open('#modal');
+        });
         li.append(link);
         ul.append(li);
       });
@@ -734,7 +737,7 @@
     };
   }
 
-  function sortedTable(sortedType, sortedStatus, isUpdate = true) {
+  function sortedTable(sortedType, sortedStatus, isUpdate = true, isSorted = true) {
     const sortedOption = {
       id: {
         up: (a, b) => b.id - a.id,
@@ -762,7 +765,7 @@
       },
     };
     clientsState.sort((a, b) => sortedOption[sortedType][sortedStatus](a, b));
-    const tbody = createTbody(clientsState, isUpdate);
+    const tbody = createTbody(clientsState, isUpdate, isSorted);
     table.append(tbody);
   }
 
@@ -793,8 +796,9 @@
         tableHeadline.setAttribute('data-sorted', headers[header].sorted);
         tableHeadline.setAttribute('data-sorted-status', headers[header].sortedStatus);
         tableHeadline.addEventListener('click', () => {
-          sortedTable(tableHeadline.getAttribute('data-sorted'), tableHeadline.getAttribute('data-sorted-status'));
-
+          lastSorted.sortedStatus = tableHeadline.getAttribute('data-sorted-status');
+          lastSorted.sortedType = tableHeadline.getAttribute('data-sorted');
+          sortedTable(lastSorted.sortedType, lastSorted.sortedStatus);
           if (tableHeadline.getAttribute('data-sorted-status') === 'up') tableHeadline.setAttribute('data-sorted-status', 'down');
           else tableHeadline.setAttribute('data-sorted-status', 'up');
         });
@@ -855,8 +859,8 @@
     document.getElementById('app').append(table, loaderObj.loader, addClient.container);
     const data = await getClientsServer();
     if (data) {
-      clientsState = data;
-      sortedTable('id', 'down', false);
+      clientsState = await data;
+      sortedTable(lastSorted.sortedType, lastSorted.sortedStatus, false, false);
       loaderObj.loader.remove();
     }
   });
