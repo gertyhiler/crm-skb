@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
 
-  padding: 114px 0;
+  padding: 108px 0;
   background-color: var(--element-bg); 
 }
 
@@ -24,9 +24,30 @@
   background-image: url('../img/loader-change.svg');
 }
 
+.loader-btn_change {
+  color: var(--violet);
+}
+
 .loader-btn_del::after {
   background-image: url('../img/loader-delete.svg');
 }
+
+.loader-btn_del {
+  color: var(--error);
+}
+
+@media screen and (max-width: 1024px) {
+
+  .loader {
+    padding: 130px 0;
+  }
+
+  .loader__image { 
+    width: 40px;
+  }
+
+}
+
 
 @keyframes loader {
   from {

@@ -1,3 +1,8 @@
+:root {
+  --border-color: #C8C5D1;
+  --bg-color: #E7E5EB;
+}
+
 /* main style modal window */
 
 
@@ -16,14 +21,10 @@
 .modal__close-btn {
   position: absolute;
   z-index: 10;
-  top: 10px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
   font-size: 0;
 
-  top: 15px;
-  right: 15px;
+  top: 18px;
+  right: 19px;
 
   width: 20px;
   height: 20px;
@@ -54,7 +55,7 @@
   display: flex;
   align-items: baseline;
 
-  margin-bottom: 25px;
+  margin-bottom: 29px;
   padding-top: 24px;
 }
 
@@ -87,6 +88,7 @@
   
   font-size: 15px;
 
+  transform: translateY(6px);
   transition: transform .2s ease-in, font-size .2s ease-in;
 }
 
@@ -96,7 +98,7 @@
 }
 
 .modal__label:not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: 28px;
 }
 
 .modal__label:last-child {
@@ -111,8 +113,7 @@
 .modal__input {
   border-bottom: 1px solid #c8c5d180;
 
-  padding-bottom: 4px;
-  padding-top: 5px;
+  padding: 6px 0;
   transition: border-color .2s ease-in;
 }
 
@@ -123,25 +124,39 @@
 .add-contact {
   display: inline-flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   background-color: #c8c5d138;
-  padding: 25px 0;
-  margin-bottom: 25px;
+  padding: 9px 31px;
+  margin-top: -3px;
+  margin-bottom: 16px;
 }
 
 .add-contact__group {
   width: 100%;
   display: inline-flex;
   align-items: stretch;
-  border: 1px solid #C8C5D1;
 }
 
 .add-contact__group:not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 .add-contact__group:last-child {
-  margin-bottom: 25px;
+  margin-bottom: 26px;
+}
+
+.add-contact__container {
+  width: 100%;
+}
+
+.add-contact__container:not(:empty) {
+  padding: 17px 0 0;
+}
+
+.add-contact__container:not(:empty) ~ .modal__add-contact_btn {
+  margin-bottom: 18px;
 }
 
 .select__text {
@@ -151,33 +166,85 @@
 .add-contact__input {
   padding: 12px 12px;
   flex-grow: 1;
+  height: 35px;
+
+  background-color: #c8c5d138;
+
+  border-top: 1px solid var(--border-color); 
+  border-bottom: 1px solid var(--border-color); 
+}
+
+.add-contact__input:last-child {
+  border-right: 1px solid var(--border-color);
 }
 
 .add-contact_clear {
-  padding: 10px 8px;
-  background-color: #E7E5EB;
-  border-left: 1px solid #C8C5D1;
+  display: flex;
+  align-items: center;
+  padding: 10px 4px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  height: 35px;
+
+  transition: border-color .2s ease-in;
+}
+
+.add-contact_clear path {
+  transition: fill .2s ease-in;
+}
+
+.add-contact_clear:hover {
+  border-color: var(--error);
+}
+
+.add-contact_clear:hover path {
+  fill: var(--error);
 }
 
 .modal__add-contact_btn {
+
   width: fit-content;
-  padding-left: 18px;
-  margin: 0 auto;
+  padding-left: 19px;
+  margin-right: 1px;
+  letter-spacing: 0.3px;
 
   background: left no-repeat url('../img/add-contact.svg');
+
+  transition: color .2s ease-in, background-image .2s ease-in;
+}
+
+.modal__add-contact_btn:hover {
+  color: var(--violet);
+
+  background-image: url('../img/add-contact-hover.svg');
 }
 
 .modal__btn {
   width: fit-content;
+  position: relative;
   margin: 0 auto;
   font-weight: 600;
- 
-  color: var(--element-bg);
 
-  background-color: var(--violet);
-
-  padding: 12px 35px;
+  padding: 13px 35px;
   margin-bottom: 5px;
+}
+
+.modal__btn_loader {
+  padding: 12px 36px;
+  padding-left: 55px;
+  background-color: var(--violet-accent);
+}
+
+.modal__btn_loader::after {
+  content: '';
+  position: absolute;
+  left: 21%;
+  top: 34%;
+  width: 14px;
+  height: 14px;
+
+  animation: loader 1s linear infinite;
+  background:1px 0.9px no-repeat url('../img/loader-save.svg');
 }
 
 .modal__secendary-btn {
@@ -215,6 +282,18 @@
   flex-direction: column;
 }
 
+.modal__window_alert .modal__headline {
+  margin-right: 20px;
+}
+
+.modal__window_alert .modal__header {
+  margin-bottom: 12px;
+}
+
+.modal__window_alert .modal__info {
+  line-height: 19px;
+}
+
 .modal__footer {
   display: flex;
   flex-direction: column;
@@ -230,13 +309,14 @@
 
 .choices {
   margin-bottom: 0;
-  flex: 0 0 33%;
-  border-right: 1px solid #C8C5D1;
-  background-color: #E7E5EB;
+  flex: 0 0 31.5%;
+  border: 1px solid var(--border-color); 
+  height: 35px;
 }
 .choices__inner {
   border: none;
-border-radius: 0;
+  border-radius: 0;
+  background-color: var(--bg-color);
 }
 .is-open .choices__inner {
   border-radius: 0;
@@ -246,22 +326,179 @@ border-radius: 0;
   padding-right: 10px;
 }
 .choices__list--dropdown, .choices__list[aria-expanded] {
-  border: 1px solid #C8C5D1;
-  background-color: #E7E5EB;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   left: -.7px;
   width: 101.1%;
   border-radius: 0;
 }
 
 .choices[data-type*=select-one] .choices__inner {
-  padding: 14px 8px;
+  padding: 6px 8px;
+}
+
+.choices__list--single {
+  padding: 3px 16px 1px 3px;
+  font-size: 12px;
+}
+
+.choices[data-type*=select-one]::after {
+  border: none; 
+  width: 10px;
+  height: 6px;
+  right: 8.3px;
+  background: center no-repeat url('data:image/svg+xml;utf8,<svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.494999 0.690031C0.249999 0.935031 0.249999 1.33003 0.494999 1.57503L4.65 5.73003C4.845 5.92503 5.16 5.92503 5.355 5.73003L9.51 1.57503C9.755 1.33003 9.755 0.93503 9.51 0.69003C9.265 0.44503 8.87 0.44503 8.625 0.69003L5 4.31003L1.375 0.685032C1.135 0.445031 0.734999 0.44503 0.494999 0.690031Z" fill="%239873FF"/></svg>');
+}
+
+.choices[data-type*=select-one].is-open::after {
+  border: none;
+  margin-top: -2px;
+  background: center no-repeat url('data:image/svg+xml;utf8,<svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.505 5.30997C9.75 5.06497 9.75 4.66997 9.505 4.42497L5.35 0.269968C5.155 0.0749681 4.84 0.0749681 4.645 0.269968L0.490001 4.42497C0.245001 4.66997 0.245001 5.06497 0.49 5.30997C0.735 5.55497 1.13 5.55497 1.375 5.30997L5 1.68997L8.625 5.31497C8.865 5.55497 9.265 5.55497 9.505 5.30997Z" fill="%239873FF"/></svg>');
+}
+
+.choices__list--dropdown .choices__item, .choices__list[aria-expanded] .choices__item {
+  font-size: 12px;
+  padding: 6px 11px;
+}
+
+.choices__item.choices__item--choice.is-selected.choices__item--selectable {
+  display: none;
 }
 
 /* hystalmodal setting */
 
 .hystmodal__window {
   cursor: default;
+  width: 33.1%;
 }
 .hystmodal__wrap {
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 1024px) { 
+  .modal__window_alert .modal__header {
+    margin-bottom: 11px;
+    padding-right: 11px;
+  }
+
+  .hystmodal__window {
+    width: 43.9%;
+  }
+
+  .add-contact {
+    padding: 9px 31px;
+  }
+
+  .add-contact__container:not(:empty) {
+    padding: 17px 0 0;
+  }
+
+  .add-contact__group:not(:last-child) {
+    margin-bottom: 17px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hystmodal__window {
+    width: 58.9%;
+  }
+
+  .modal__container {
+    margin: 0 31px;
+  }
+
+  .modal__header {
+    margin-bottom: 27px
+  }
+
+  .modal__close-btn {
+    top: 18px;
+    right: 21px;
+  }
+
+  .modal__window_alert .modal__headline {
+    margin-right: 9px;
+  }
+
+  .modal__window_alert .modal__info {
+    margin-bottom: 25px;
+  }
+
+}
+
+@media screen and (max-width: 678px) {
+  .hystmodal__window {
+    width: 78.9%;
+  }
+}
+
+@media screen and (max-width: 508px) {
+  .hystmodal__window {
+    width: 90.9%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .hystmodal__window {
+    width: 93.9%;
+  }
+
+  .modal__container {
+    margin: 0 15px;
+    margin-bottom: 29px;
+  }
+
+  .modal__close-btn {
+    top: 6px;
+    right: 7px;
+  }
+
+  .modal__client-id {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60px;
+  }
+
+  .modal__label:not(:last-child) {
+    margin-bottom: 28px;
+  }
+
+  .add-contact__input {
+    padding: 12px 0 12px 6px;
+    width: 100%;
+  }
+
+  .add-contact__container:not(:empty) {
+    padding: 17px 0 0;
+  }
+
+  .add-contact {
+    padding: 9px 15px;
+    margin-bottom: 14px;
+  }
+
+  .choices {
+    flex: 0 0 40.5%;
+  }
+
+  .choices__list--single {
+    padding-top: 2px;
+  }
+
+  .modal__window_alert .modal__headline {
+    margin-right: 9px;
+  }
+
+  .modal__info {
+    margin-bottom: 26px;
+  }
+
+  .add-contact__container:not(:empty) ~ .modal__add-contact_btn {
+    margin-bottom: 20px;
+  }
+
+  .add-contact__group:last-child {
+    margin-bottom: 28px;
+}
 }
