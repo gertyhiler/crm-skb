@@ -1,3 +1,5 @@
+.idea
+node_modules
+.vscode
 .DS_Store
-node_module
-crm-frontend/node_modules/
+/dist
